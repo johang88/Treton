@@ -5,8 +5,7 @@
 	],
 	"LayerConfigurations": {
 		"Default": [
-			{ "Name": "Test", "RenderTargets": [] },
-			{ "Name": "GBuffer", "RenderTargets": [ "Albedo", "Depth" ] },
+			{ "Name": "GBuffer", "RenderTargets": [ "Albedo" ] },
 			{ "Name": "Tonemap", "ResourceGenerator": "Tonemap", "RenderTargets": [] }
 		]
 	},
