@@ -37,6 +37,8 @@ namespace Treton.Graphics.Renderer
 			// todo: make this not suck
 			foreach (var layer in layerConfiguration.Layers)
 			{
+				_renderSystem.SetRenderTarget(layer.RenderTargets);
+
 				for (var meshIndex = 0; meshIndex < meshCount; meshIndex++)
 				{
 					var mesh = meshes[meshIndex];

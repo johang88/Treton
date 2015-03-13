@@ -102,7 +102,7 @@ namespace Treton.Graphics
 
 		public void SetRenderTarget(params Texture[] textures)
 		{
-			if (textures.Length == 0 || textures[0] == null)
+			if (textures == null || textures.Length == 0 || textures[0] == null)
 			{
 				GL.BindFramebuffer(FramebufferTarget.Framebuffer, 0);
 				return;
