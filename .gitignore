@@ -7,6 +7,9 @@
 *.userosscache
 *.sln.docstates
 
+# Tools retrieved through nuget
+Tools/FAKE/*
+
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/

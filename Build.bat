@@ -1,0 +1,1 @@
+"Tools\NuGet.exe" "Install" "FAKE" "-OutputDirectory" "Tools" "-ExcludeVersion"
