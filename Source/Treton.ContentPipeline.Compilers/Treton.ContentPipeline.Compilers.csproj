@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Import.cs" />
+    <Compile Include="Material\Shaders\Preprocessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Material\Pass.cs" />
     <Compile Include="Material\MaterialCompiler.cs" />

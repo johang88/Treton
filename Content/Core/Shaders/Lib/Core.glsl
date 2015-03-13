@@ -21,7 +21,6 @@ layout(std140, binding = 0) uniform PerFrame
 	mat4 projectionMatrix;
 	mat4 itViewProjectionMatrix;
 	mat4 itViewMatrix;
-	mat4 itViewProjectionMatrix;
 	mat4 inverseViewProjection;
 };
 

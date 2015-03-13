@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Treton.ContentPipeline.Compilers.Shader
+namespace Treton.ContentPipeline.Compilers.Material
 {
 	class Pass
 	{

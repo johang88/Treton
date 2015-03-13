@@ -1,5 +1,7 @@
 #version 440 core
 
+#include "Core/Shaders/Lib/Core.glsl"
+
 out gl_PerVertex
 {
 	vec4 gl_Position;

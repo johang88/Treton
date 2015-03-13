@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MaterialData = Treton.Graphics.ResourceLoaders.MaterialData;
 
-namespace Treton.ContentPipeline.Compilers.Shader
+namespace Treton.ContentPipeline.Compilers.Material
 {
 	public class ShaderCompiler : ICompiler
 	{
@@ -89,6 +89,8 @@ namespace Treton.ContentPipeline.Compilers.Shader
 			}
 
 			// TODO: fix define stuff
+			var preprocessor = new Shaders.Preprocessor(context);
+			source = await preprocessor.Process(source);
 
 			var index = shaders.Count;
 			shaders.Add(new MaterialData.Shader
