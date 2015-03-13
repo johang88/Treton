@@ -1,0 +1,18 @@
+{
+	"RenderTargets": [
+		{ "Name": "Depth", "PixelFormat": "DepthComponent", "PixelInternalFormat": "Rgba16f"  },
+		{ "Name": "Albedo", "PixelFormat": "Rgba", "PixelInternalFormat": "DepthComponent24" }
+	],
+	"LayerConfigurations": {
+		"Default": [
+			{ "Name": "Test", "RenderTargets": [] },
+			{ "Name": "GBuffer", "RenderTargets": [ "Albedo", "Depth" ] },
+			{ "Name": "Tonemap", "ResourceGenerator": "Tonemap", "RenderTargets": [] }
+		]
+	},
+	"ResourceGenerators": {
+		"Tonemap": [
+			{ "Type": "FullScreenPass", "Material": "/Materials/Post/Tonemap.material" }
+		]
+	}
+}

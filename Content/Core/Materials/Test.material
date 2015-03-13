@@ -1,0 +1,8 @@
+{
+	"Test": [
+		{ 
+			"VertexShader": { "Source": "Core/Shaders/Test.vert", "Defines": [] },
+			"FragmentShader": { "Source": "Core/Shaders/Test.frag", "Defines": [] }
+		}
+	]
+}

@@ -1,0 +1,1 @@
+"Build/BinDebug/PackageCompiler.exe" --input=Content/ --output=Build/Data/ --packages=Core --platform=x86

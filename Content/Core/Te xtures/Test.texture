@@ -1,0 +1,10 @@
+{
+	"Source": "Core/Textures/Test.tga",
+	"IsNormalMap": false,
+	"Invert": {
+		"R": false,
+		"G": false,
+		"B": false,
+		"A": false
+	}
+}

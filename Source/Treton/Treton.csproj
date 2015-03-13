@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C862D8D2-E0A6-4764-8FE9-F8F724B20D44}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Treton</RootNamespace>
+    <AssemblyName>Treton</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MurmurHash">
+      <HintPath>..\packages\murmurhash.1.0.0\lib\net45\MurmurHash.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenTK">
+      <HintPath>..\packages\OpenTK.1.1.1589.5942\lib\NET40\OpenTK.dll</HintPath>
+    </Reference>
+    <Reference Include="ParallelExtensionsExtras">
+      <HintPath>..\packages\MSFT.ParallelExtensionsExtras.1.2.0\lib\ParallelExtensionsExtras.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ContentPipeline\CompilationContext.cs" />
+    <Compile Include="ContentPipeline\ContentCompilers.cs" />
+    <Compile Include="ContentPipeline\ContentCompilerDiscoverer.cs" />
+    <Compile Include="ContentPipeline\ICompiler.cs" />
+    <Compile Include="ContentPipeline\PackageCompiler.cs" />
+    <Compile Include="Core\Hash.cs" />
+    <Compile Include="Core\IO\FileSystem.cs" />
+    <Compile Include="Core\MainThreadScheduler.cs" />
+    <Compile Include="Core\Resources\BaseLoader.cs" />
+    <Compile Include="Core\Resources\ILoader.cs" />
+    <Compile Include="Core\Resources\Package.cs" />
+    <Compile Include="Core\Resources\ResourceId.cs" />
+    <Compile Include="Core\Resources\ResourceLoaders.cs" />
+    <Compile Include="Core\Resources\ResourceManager.cs" />
+    <Compile Include="Framework\Engine.cs" />
+    <Compile Include="Framework\EngineConfiguration.cs" />
+    <Compile Include="Framework\IApplication.cs" />
+    <Compile Include="Graphics\Buffer.cs" />
+    <Compile Include="Graphics\Camera.cs" />
+    <Compile Include="Graphics\Material.cs" />
+    <Compile Include="Graphics\Mesh.cs" />
+    <Compile Include="Graphics\Renderer\Layer.cs" />
+    <Compile Include="Graphics\Renderer\LayerConfiguration.cs" />
+    <Compile Include="Graphics\Renderer\Renderer.cs" />
+    <Compile Include="Graphics\Renderer\RendererConfiguration.cs" />
+    <Compile Include="Graphics\RenderSystem.cs" />
+    <Compile Include="Graphics\ResourceLoaders\MaterialData\Layer.cs" />
+    <Compile Include="Graphics\ResourceLoaders\MaterialData\Material.cs" />
+    <Compile Include="Graphics\ResourceLoaders\MaterialData\Pass.cs" />
+    <Compile Include="Graphics\ResourceLoaders\MaterialData\Shader.cs" />
+    <Compile Include="Graphics\ResourceLoaders\MaterialLoader.cs" />
+    <Compile Include="Graphics\ResourceLoaders\RenderConfigLoader.cs" />
+    <Compile Include="Graphics\Shader.cs" />
+    <Compile Include="Graphics\Texture.cs" />
+    <Compile Include="Graphics\VertexFormat.cs" />
+    <Compile Include="Graphics\VertexFormatElement.cs" />
+    <Compile Include="Graphics\VertexFormatSemantic.cs" />
+    <Compile Include="Graphics\Viewport.cs" />
+    <Compile Include="Graphics\World\RenderWorld.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
