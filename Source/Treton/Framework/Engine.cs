@@ -58,8 +58,6 @@ namespace Treton.Framework
 
 			// Setup resource manager
 			_resourceLoaders = new ResourceLoaders();
-			_resourceLoaders.Add(Core.Hash.HashString("material"), new Graphics.ResourceLoaders.MaterialLoader(_mainThreadScheduler));
-			_resourceLoaders.Add(Core.Hash.HashString("renderconfig"), new Graphics.ResourceLoaders.RenderConfigLoader(_mainThreadScheduler));
 			_resourceManager = new ResourceManager(_resourceLoaders);
 
 			// Core resources
@@ -122,7 +120,11 @@ namespace Treton.Framework
 			GL.DebugMessageCallback(_debugProcCallback, IntPtr.Zero);
 			GL.Enable(EnableCap.DebugOutput);
 
-			_renderSystem = new RenderSystem();
+			_renderSystem = new RenderSystem(_configuration.Renderer.Width, _configuration.Renderer.Height);
+
+			// Init resource loaders
+			_resourceLoaders.Add(Core.Hash.HashString("material"), new Graphics.ResourceLoaders.MaterialLoader(_mainThreadScheduler));
+			_resourceLoaders.Add(Core.Hash.HashString("renderconfig"), new Graphics.ResourceLoaders.RenderConfigLoader(_mainThreadScheduler, _renderSystem));
 
 			// Load core package
 			var coreResourcesLoadTask = _coreResources.Load();

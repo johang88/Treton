@@ -13,14 +13,18 @@ namespace Treton.Graphics.ResourceLoaders
 	class RenderConfigLoader : ILoader
 	{
 		private readonly MainThreadScheduler _scheduler;
+		private readonly RenderSystem _renderSystem;
 		private readonly TaskFactory _factory;
 
-		public RenderConfigLoader(MainThreadScheduler scheduler)
+		public RenderConfigLoader(MainThreadScheduler scheduler, RenderSystem renderSystem)
 		{
 			if (scheduler == null)
 				throw new ArgumentNullException("scheduler");
+			if (renderSystem == null)
+				throw new ArgumentNullException("renderSystem");
 
 			_scheduler = scheduler;
+			_renderSystem = renderSystem;
 			_factory = new TaskFactory(scheduler);
 		}
 
@@ -47,12 +51,12 @@ namespace Treton.Graphics.ResourceLoaders
 
 		private void BringIn(Renderer.RendererConfiguration resource)
 		{
-			resource.Initialize();
+			resource.Initialize(_renderSystem);
 		}
 
 		private void BringOut(Renderer.RendererConfiguration resource)
 		{
-
+			resource.Teardown();
 		}
 
 		public async Task<object> Load(ResourceId id, System.IO.Stream stream)

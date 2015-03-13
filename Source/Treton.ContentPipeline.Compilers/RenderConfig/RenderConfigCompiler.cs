@@ -32,8 +32,7 @@ namespace Treton.ContentPipeline.Compilers.RenderConfig
 				new Graphics.Renderer.RendererConfiguration.RenderTargetDefinition
 				{
 					Name = Core.Hash.HashString(rt.Name),
-					PixelFormat = rt.PixelFormat,
-					PixelInternalFormat = rt.PixelInternalFormat
+					Format = rt.Format
 				}
 			).ToArray();
 
@@ -73,8 +72,7 @@ namespace Treton.ContentPipeline.Compilers.RenderConfig
 		public class RenderTarget
 		{
 			public string Name { get; set; }
-			public PixelFormat PixelFormat { get; set; }
-			public PixelInternalFormat PixelInternalFormat { get; set; }
+			public PixelInternalFormat Format { get; set; }
 		}
 
 		public class LayerConfiguration

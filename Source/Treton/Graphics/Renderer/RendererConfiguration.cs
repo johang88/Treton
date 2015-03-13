@@ -18,12 +18,22 @@ namespace Treton.Graphics.Renderer
 		/// <summary>
 		/// Initialize all internal resources
 		/// </summary>
-		internal void Initialize()
+		internal void Initialize(RenderSystem renderSystem)
 		{
-			// Create render targets
-			foreach (var definition in GlobalRenderTargetDefinitions)
+			// Setup render targets
+			GlobalRenderTargets = new Texture[GlobalRenderTargetDefinitions.Length];
+			for (var i = 0; i < GlobalRenderTargetDefinitions.Length; i++)
 			{
-				// Ehhh todo ...
+				GlobalRenderTargets[i] = Texture.CreateImmutable(TextureTarget.Texture2D, renderSystem.Width, renderSystem.Height, GlobalRenderTargetDefinitions[i].Format);
+			}
+		}
+
+		internal void Teardown()
+		{
+			for (var i = 0; i < GlobalRenderTargets.Length; i++)
+			{
+				GlobalRenderTargets[i].Dispose();
+				GlobalRenderTargets[i] = null;
 			}
 		}
 
@@ -31,8 +41,7 @@ namespace Treton.Graphics.Renderer
 		public class RenderTargetDefinition
 		{
 			public uint Name;
-			public PixelFormat PixelFormat;
-			public PixelInternalFormat PixelInternalFormat;
+			public PixelInternalFormat Format;
 		}
 	}
 }

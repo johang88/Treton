@@ -14,8 +14,14 @@ namespace Treton.Graphics
 		private readonly int _frameBufferHandle;
 		private int _numberOfActiveRenderTargets = 0;
 
-		public RenderSystem()
+		public int Width { get; private set; }
+		public int Height { get; private set; }
+
+		public RenderSystem(int width, int height)
 		{
+			Width = width;
+			Height = height;
+
 			_pipelineHandle = GL.GenProgramPipeline();
 			GL.BindProgramPipeline(_pipelineHandle);
 
@@ -114,7 +120,7 @@ namespace Treton.Graphics
 			for (var i = 0; i < textures.Length; i++)
 			{
 				var texture = textures[i];
-				if (texture.PixelFormat == PixelFormat.DepthComponent)
+				if (texture.Format == PixelInternalFormat.DepthComponent24)
 				{
 					GL.Ext.NamedFramebufferTexture(_frameBufferHandle, FramebufferAttachment.DepthAttachment, texture.Handle, 0);
 				}

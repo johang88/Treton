@@ -1,7 +1,7 @@
 {
 	"RenderTargets": [
-		{ "Name": "Depth", "PixelFormat": "DepthComponent", "PixelInternalFormat": "Rgba16f"  },
-		{ "Name": "Albedo", "PixelFormat": "Rgba", "PixelInternalFormat": "DepthComponent24" }
+		{ "Name": "Depth", "Format": "DepthComponent24" },
+		{ "Name": "Albedo", "Format": "Rgba16f" }
 	],
 	"LayerConfigurations": {
 		"Default": [
