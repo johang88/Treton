@@ -8,6 +8,6 @@ namespace Treton.Graphics.Renderer.Modifiers
 {
 	public interface IModifier : IDisposable
 	{
-		void Execute(RenderSystem renderSystem);
+		void Execute(RendererConfiguration config, RenderSystem renderSystem);
 	}
 }

@@ -4,7 +4,7 @@
 			"VertexShader": { "Source": "Core/Shaders/Post/Tonemap.vert", "Defines": [] },
 			"FragmentShader": { "Source": "Core/Shaders/Post/Tonemap.frag", "Defines": [] },
 			"Samplers": {
-				"sceneSampler": { "Type": "rendertarget", "source": "Albedo" }
+				"sceneSampler": { "Type": "RenderTarget", "Source": "Albedo" }
 			}
 		}
 	]

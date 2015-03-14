@@ -1,4 +1,6 @@
 ﻿using OpenTK;
+using OpenTK.Graphics;
+using OpenTK.Graphics.OpenGL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,9 +40,13 @@ namespace Treton.Graphics.Renderer
 			foreach (var layer in layerConfiguration.Layers)
 			{
 				_renderSystem.SetRenderTarget(layer.RenderTargets);
+
+				GL.ClearColor(Color4.AliceBlue);
+				GL.Clear(ClearBufferMask.DepthBufferBit | ClearBufferMask.ColorBufferBit);
+
 				if (layer.ResourceGenerator != null)
 				{
-					layer.ResourceGenerator.Execute(_renderSystem);
+					layer.ResourceGenerator.Execute(_configuration, _renderSystem);
 				}
 				else
 				{

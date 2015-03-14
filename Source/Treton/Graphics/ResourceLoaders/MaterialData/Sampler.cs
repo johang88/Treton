@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 namespace Treton.Graphics.ResourceLoaders.MaterialData
 {
 	[Serializable]
-	public class Pass
+	public class Sampler
 	{
-		public int[] Shaders;
-		public Sampler[] Samplers;
+		public uint Name;
+		public Treton.Graphics.Material.SamplerType Type;
+		public Core.Resources.ResourceId Source;
 	}
 }

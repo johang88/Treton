@@ -54,17 +54,26 @@ namespace Treton.Graphics.ResourceLoaders
 				var layer = resourceData.Layers[i];
 
 				var passes = new Material.Pass[layer.Passes.Length];
-				for (var p  = 0; p < passes.Length; p++)
+				for (var p = 0; p < passes.Length; p++)
 				{
 					var pass = layer.Passes[p];
-					
+
 					var passShaders = new Shader[pass.Shaders.Length];
-					for(var s = 0; s < passShaders.Length; s++)
+					var samplers = new Material.Sampler[pass.Samplers.Length];
+
+					for (var s = 0; s < passShaders.Length; s++)
 					{
 						passShaders[s] = shaders[pass.Shaders[s]];
 					}
 
-					passes[i] = new Material.Pass(passShaders);
+					for (var s = 0; s < samplers.Length; s++)
+					{
+						var sampler = pass.Samplers[i];
+						// TODO: // Resolve textures if we are supposed to
+						samplers[s] = new Material.Sampler(sampler.Name, sampler.Type, sampler.Source, null);
+					}
+
+					passes[i] = new Material.Pass(passShaders, samplers);
 				}
 
 				layers[i] = new Material.Layer(layer.Name, passes);

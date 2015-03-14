@@ -51,7 +51,7 @@
     <Compile Include="Material\Shaders\Preprocessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Material\Pass.cs" />
-    <Compile Include="Material\MaterialCompiler.cs" />
+    <Compile Include="Material\Shaders\MaterialCompiler.cs" />
     <Compile Include="Material\ShaderSource.cs" />
     <Compile Include="RenderConfig\RenderConfigCompiler.cs" />
   </ItemGroup>

@@ -55,9 +55,25 @@ namespace Treton.ContentPipeline.Compilers.Material
 					await AddShader(context, OpenTK.Graphics.OpenGL.ShaderType.VertexShader, pass.VertexShader, shaders, passShaders);
 					await AddShader(context, OpenTK.Graphics.OpenGL.ShaderType.FragmentShader, pass.FragmentShader, shaders, passShaders);
 
+					var samplers = new List<MaterialData.Sampler>();
+
+					if (pass.Samplers != null)
+					{
+						foreach (var sampler in pass.Samplers)
+						{
+							samplers.Add(new MaterialData.Sampler
+							{
+								Name = Core.Hash.HashString(sampler.Key),
+								Type = sampler.Value.Type,
+								Source = new Core.Resources.ResourceId(sampler.Value.Source, "texture")
+							});
+						}
+					}
+
 					passes.Add(new MaterialData.Pass
 					{
-						Shaders = passShaders.ToArray()
+						Shaders = passShaders.ToArray(),
+						Samplers = samplers.ToArray()
 					});
 				}
 

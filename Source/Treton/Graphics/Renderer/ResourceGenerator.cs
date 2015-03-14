@@ -56,11 +56,11 @@ namespace Treton.Graphics.Renderer
 			}
 		}
 
-		public void Execute(RenderSystem renderSystem)
+		public void Execute(RendererConfiguration config, RenderSystem renderSystem)
 		{
 			foreach (var modifier in Modifiers)
 			{
-				modifier.Execute(renderSystem);
+				modifier.Execute(config, renderSystem);
 			}
 		}
 

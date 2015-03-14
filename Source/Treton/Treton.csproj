@@ -86,6 +86,7 @@
     <Compile Include="Graphics\ResourceLoaders\MaterialData\Layer.cs" />
     <Compile Include="Graphics\ResourceLoaders\MaterialData\Material.cs" />
     <Compile Include="Graphics\ResourceLoaders\MaterialData\Pass.cs" />
+    <Compile Include="Graphics\ResourceLoaders\MaterialData\Sampler.cs" />
     <Compile Include="Graphics\ResourceLoaders\MaterialData\Shader.cs" />
     <Compile Include="Graphics\ResourceLoaders\MaterialLoader.cs" />
     <Compile Include="Graphics\ResourceLoaders\RenderConfigLoader.cs" />

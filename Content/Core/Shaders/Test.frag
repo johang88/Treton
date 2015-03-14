@@ -10,5 +10,7 @@ in Input
 layout(location = 0) out vec4 oColor;
 
 void main() {
-	oColor = iColor;
+	vec3 color = pow(iColor.xyz, vec3(2.2));
+	
+	oColor = vec4(color, 1);
 }

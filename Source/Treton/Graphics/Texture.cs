@@ -9,6 +9,8 @@ namespace Treton.Graphics
 {
 	public class Texture : IDisposable
 	{
+		public readonly Core.Resources.ResourceId Id;
+
 		public int Handle { get; private set; }
 		public TextureTarget TextureTarget { get; private set; }
 		public PixelInternalFormat Format { get; private set; }
@@ -16,13 +18,14 @@ namespace Treton.Graphics
 		public int Height { get; private set; }
 		public bool IsMutable { get; private set; }
 
-		private Texture()
+		private Texture(Core.Resources.ResourceId id)
 		{
+			Id = id;
 		}
 
-		public static Texture CreateMutable(TextureTarget target, int width, int height, PixelInternalFormat format)
+		public static Texture CreateMutable(Core.Resources.ResourceId id, TextureTarget target, int width, int height, PixelInternalFormat format)
 		{
-			var texture = new Texture();
+			var texture = new Texture(id);
 			texture.TextureTarget = target;
 			texture.IsMutable = true;
 			texture.Format = format;
@@ -37,9 +40,9 @@ namespace Treton.Graphics
 			return texture;
 		}
 
-		public static Texture CreateImmutable(TextureTarget target, int width, int height, PixelInternalFormat format)
+		public static Texture CreateImmutable(Core.Resources.ResourceId id, TextureTarget target, int width, int height, PixelInternalFormat format)
 		{
-			var texture = new Texture();
+			var texture = new Texture(id);
 			texture.TextureTarget = target;
 			texture.IsMutable = false;
 			texture.Format = format;

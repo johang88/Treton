@@ -25,7 +25,11 @@ namespace Treton.Graphics.Renderer
 			GlobalRenderTargets = new Texture[GlobalRenderTargetDefinitions.Length];
 			for (var i = 0; i < GlobalRenderTargetDefinitions.Length; i++)
 			{
-				GlobalRenderTargets[i] = Texture.CreateImmutable(TextureTarget.Texture2D, renderSystem.Width, renderSystem.Height, GlobalRenderTargetDefinitions[i].Format);
+				GlobalRenderTargets[i] = Texture.CreateImmutable
+					(new Core.Resources.ResourceId(GlobalRenderTargetDefinitions[i].Name, Core.Hash.HashString("texture")),
+					TextureTarget.Texture2D, 
+					renderSystem.Width, renderSystem.Height, 
+					GlobalRenderTargetDefinitions[i].Format);
 			}
 
 			// Init resource generators

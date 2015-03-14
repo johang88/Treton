@@ -10,5 +10,12 @@ namespace Treton.ContentPipeline.Compilers.Material
 	{
 		public ShaderSource VertexShader { get; set; }
 		public ShaderSource FragmentShader { get; set; }
+		public Dictionary<string, Sampler> Samplers { get; set; }
+	}
+
+	class Sampler
+	{
+		public Treton.Graphics.Material.SamplerType Type { get; set; }
+		public string Source { get; set; }
 	}
 }

@@ -11,6 +11,7 @@ namespace Treton.Graphics
 	{
 		public int Handle { get; private set; }
 		public readonly ShaderType Type;
+		public readonly Dictionary<uint, int> Uniforms = new Dictionary<uint, int>();
 
 		public Shader(ShaderType type, string source)
 		{
@@ -29,6 +30,22 @@ namespace Treton.Graphics
 				Handle = 0;
 
 				throw new Exception(errors);
+			}
+
+			// Discover all uniforms
+			int uniformCount;
+			GL.GetProgram(Handle, GetProgramParameterName.ActiveUniforms, out uniformCount);
+
+			for (var i = 0; i < uniformCount; i++)
+			{
+				int size;
+				ActiveUniformType uniformType;
+
+				var name = GL.GetActiveUniform(Handle, i, out size, out uniformType);
+				name = name.Replace("[0]", "");
+				var location = GL.GetUniformLocation(Handle, name);
+
+				Uniforms.Add(Core.Hash.HashString(name), location);
 			}
 		}
 
@@ -50,6 +67,16 @@ namespace Treton.Graphics
 				GL.DeleteProgram(Handle);
 				Handle = 0;
 			}
+		}
+
+		public bool HasUniform(uint name)
+		{
+			return Uniforms.ContainsKey(name);
+		}
+
+		public int GetUniformLocation(uint name)
+		{
+			return Uniforms[name];
 		}
 	}
 }

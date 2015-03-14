@@ -44,7 +44,7 @@ namespace Treton.Graphics.Renderer.Modifiers
 			_quadMesh.Dispose();
 		}
 
-		public void Execute(RenderSystem renderSystem)
+		public void Execute(RendererConfiguration config, RenderSystem renderSystem)
 		{
 			var mesh = _quadMesh.Mesh;
 			var material = mesh.Materials[0];
@@ -52,8 +52,9 @@ namespace Treton.Graphics.Renderer.Modifiers
 			foreach (var materiaLayer in material.Layers)
 			{
 				foreach (var pass in materiaLayer.Passes)
-				{
+				{					
 					renderSystem.ClearShaders();
+					pass.Bind(config.GlobalRenderTargets);
 
 					foreach (var shader in pass.Shaders)
 					{
