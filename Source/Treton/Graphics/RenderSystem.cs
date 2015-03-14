@@ -90,13 +90,15 @@ namespace Treton.Graphics
 			GL.UseProgramStages(_pipelineHandle, ProgramStageMask.ComputeShaderBit, 0);
 		}
 
-		public void Draw(int first, int count)
+		public void Draw(int handle, int first, int count)
 		{
+			GL.BindVertexArray(handle);
 			GL.DrawArrays(PrimitiveType.Triangles, first, count);
 		}
 
-		public void DrawIndexed(int baseVertex, int count)
+		public void DrawIndexed(int handle, int baseVertex, int count)
 		{
+			GL.BindVertexArray(handle);
 			GL.DrawElementsBaseVertex(PrimitiveType.Triangles, count, DrawElementsType.UnsignedInt, IntPtr.Zero, baseVertex);
 		}
 
@@ -113,6 +115,7 @@ namespace Treton.Graphics
 			{
 				GL.Ext.NamedFramebufferTexture2D(_frameBufferHandle, FramebufferAttachment.ColorAttachment0 + i, TextureTarget.Texture2D, 0, 0);
 			}
+			_numberOfActiveRenderTargets = 0;
 
 			GL.Ext.NamedFramebufferTexture(_frameBufferHandle, FramebufferAttachment.DepthAttachment, 0, 0);
 

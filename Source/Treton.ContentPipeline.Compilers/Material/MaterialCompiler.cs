@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using MaterialData = Treton.Graphics.ResourceLoaders.MaterialData;
@@ -28,12 +29,12 @@ namespace Treton.ContentPipeline.Compilers.Material
 
 			var output = await CompileMaterial(material, context);
 
-			using (var ms = new MemoryStream())
-			using (var writer = new BsonWriter(ms))
-			{
-				var serializer = new JsonSerializer();
-				serializer.Serialize(writer, output);
+			var formatter = new BinaryFormatter();
 
+			using (var ms = new MemoryStream())
+			using (var writer = new BinaryWriter(ms))
+			{
+				formatter.Serialize(ms, output);
 				return ms.GetBuffer();
 			}
 		}

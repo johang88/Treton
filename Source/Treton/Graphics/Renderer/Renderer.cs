@@ -11,7 +11,7 @@ namespace Treton.Graphics.Renderer
 	{
 		private readonly RenderSystem _renderSystem;
 		private readonly RendererConfiguration _configuration;
-		
+
 		private int _activeLayerConfiguration = 0;
 
 		public Renderer(RenderSystem renderSystem, RendererConfiguration configuration)
@@ -38,31 +38,37 @@ namespace Treton.Graphics.Renderer
 			foreach (var layer in layerConfiguration.Layers)
 			{
 				_renderSystem.SetRenderTarget(layer.RenderTargets);
-
-				for (var meshIndex = 0; meshIndex < meshCount; meshIndex++)
+				if (layer.ResourceGenerator != null)
 				{
-					var mesh = meshes[meshIndex];
-					mesh.Bind();
-					
-					for (var subMeshIndex = 0; subMeshIndex < mesh.SubMeshes.Length; subMeshIndex++)
+					layer.ResourceGenerator.Execute(_renderSystem);
+				}
+				else
+				{
+					for (var meshIndex = 0; meshIndex < meshCount; meshIndex++)
 					{
-						var material = mesh.Materials[subMeshIndex];
+						var mesh = meshes[meshIndex];
+						mesh.Bind();
 
-						foreach (var materiaLayer in material.Layers)
+						for (var subMeshIndex = 0; subMeshIndex < mesh.SubMeshes.Length; subMeshIndex++)
 						{
-							if (materiaLayer.Name != layer.Name)
-								break;
+							var material = mesh.Materials[subMeshIndex];
 
-							foreach (var pass in materiaLayer.Passes)
+							foreach (var materiaLayer in material.Layers)
 							{
-								_renderSystem.ClearShaders();
+								if (materiaLayer.Name != layer.Name)
+									break;
 
-								foreach (var shader in pass.Shaders)
+								foreach (var pass in materiaLayer.Passes)
 								{
-									_renderSystem.SetShader(shader);
-								}
+									_renderSystem.ClearShaders();
 
-								_renderSystem.Draw(mesh.SubMeshes[subMeshIndex].Offset, mesh.SubMeshes[subMeshIndex].Count);
+									foreach (var shader in pass.Shaders)
+									{
+										_renderSystem.SetShader(shader);
+									}
+
+									_renderSystem.Draw(mesh.Handle, mesh.SubMeshes[subMeshIndex].Offset, mesh.SubMeshes[subMeshIndex].Count);
+								}
 							}
 						}
 					}

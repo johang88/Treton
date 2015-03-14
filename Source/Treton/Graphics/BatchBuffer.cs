@@ -17,7 +17,6 @@ namespace Treton.Graphics
 		private int _dataCount;
 
 		public readonly Mesh Mesh;
-		private Mesh.SubMesh _subMesh;
 
 		private readonly VertexFormat _vertexFormat;
 
@@ -43,14 +42,13 @@ namespace Treton.Graphics
 				});
 			}
 
-
-			_subMesh = new Graphics.Mesh.SubMesh
+			var subMesh = new Graphics.Mesh.SubMesh
 			{
 				Offset = 0,
 				Count = 0
 			};
 
-			Mesh = new Mesh(_vertexFormat, new byte[0], new byte[0], new Mesh.SubMesh[] { _subMesh }, new Material[] { material });
+			Mesh = new Mesh(_vertexFormat, new byte[0], new byte[0], new Mesh.SubMesh[] { subMesh }, new Material[] { material }, true);
 		}
 
 		public void Dispose()
@@ -88,7 +86,7 @@ namespace Treton.Graphics
 		{
 			Mesh.VertexBuffer.SetData(_vertexData);
 			Mesh.IndexBuffer.SetData(_indexData);
-			_subMesh.Count = _indexCount;
+			Mesh.SubMeshes[0].Count = _indexCount;
 		}
 
 		public void AddVector2(float x, float y)

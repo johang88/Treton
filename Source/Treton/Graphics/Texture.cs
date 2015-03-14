@@ -20,6 +20,23 @@ namespace Treton.Graphics
 		{
 		}
 
+		public static Texture CreateMutable(TextureTarget target, int width, int height, PixelInternalFormat format)
+		{
+			var texture = new Texture();
+			texture.TextureTarget = target;
+			texture.IsMutable = true;
+			texture.Format = format;
+			texture.Width = width;
+			texture.Height = height;
+
+			texture.Handle = GL.GenTexture();
+
+			// TODO ....
+			GL.Ext.TextureImage2D(texture.Handle, texture.TextureTarget, 0, (int)texture.Format, texture.Width, texture.Height, 0, PixelFormat.Red, PixelType.Byte, IntPtr.Zero);
+
+			return texture;
+		}
+
 		public static Texture CreateImmutable(TextureTarget target, int width, int height, PixelInternalFormat format)
 		{
 			var texture = new Texture();

@@ -44,7 +44,22 @@ namespace Treton.ContentPipeline.Compilers.RenderConfig
 						new Graphics.Renderer.Layer
 						{
 							Name = Core.Hash.HashString(l.Name),
-							RenderTargetNames = l.RenderTargets.Select(Core.Hash.HashString).ToArray()
+							RenderTargetNames = l.RenderTargets.Select(Core.Hash.HashString).ToArray(),
+							ResourceGeneratorName = string.IsNullOrWhiteSpace(l.ResourceGenerator) ? (uint?)null : (uint?)Core.Hash.HashString(l.ResourceGenerator)
+						}
+					).ToArray()
+				}
+			).ToArray();
+
+			renderConfig.ResourceGenerators = sourceRenderConfig.ResourceGenerators.Select(rc =>
+				new Graphics.Renderer.ResourceGenerator
+				{
+					Name =Core.Hash.HashString(rc.Key),
+					ModifierDescriptions = rc.Value.Select(m =>
+						new Graphics.Renderer.ResourceGenerator.ModifierDefinition
+						{
+							Type = Core.Hash.HashString(m.Type),
+							Material = context.Queue(m.Material)
 						}
 					).ToArray()
 				}

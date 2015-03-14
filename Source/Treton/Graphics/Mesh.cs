@@ -15,7 +15,7 @@ namespace Treton.Graphics
 		public SubMesh[] SubMeshes { get; private set; }
 		public Material[] Materials;
 
-		public Mesh(VertexFormat vertexFormat, byte[] vertexData, byte[] indexData, SubMesh[] subMeshes, Material[] materials)
+		public Mesh(VertexFormat vertexFormat, byte[] vertexData, byte[] indexData, SubMesh[] subMeshes, Material[] materials, bool mutable = false)
 		{
 			if (vertexFormat == null)
 				throw new ArgumentNullException("vertexFormat");
@@ -35,11 +35,17 @@ namespace Treton.Graphics
 			SubMeshes = subMeshes;
 			Materials = materials;
 
-			VertexBuffer = new Buffer(BufferTarget.ArrayBuffer, vertexFormat, false);
-			IndexBuffer = new Buffer(BufferTarget.ElementArrayBuffer, false);
+			VertexBuffer = new Buffer(BufferTarget.ArrayBuffer, vertexFormat, mutable);
+			IndexBuffer = new Buffer(BufferTarget.ElementArrayBuffer, mutable);
 
 			VertexBuffer.SetData(vertexData);
 			IndexBuffer.SetData(indexData);
+
+			GL.BindVertexArray(Handle);
+			GL.BindBuffer(IndexBuffer.Target, IndexBuffer.Handle);
+			GL.BindVertexArray(0);
+
+			GL.Ext.VertexArrayBindVertexBuffer(Handle, 0, VertexBuffer.Handle, IntPtr.Zero, vertexFormat.Size);
 
 			for (var v = 0; v < vertexFormat.Elements.Length; v++)
 			{

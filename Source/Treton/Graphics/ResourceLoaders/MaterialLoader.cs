@@ -1,9 +1,8 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Bson;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using Treton.Core;
@@ -29,10 +28,9 @@ namespace Treton.Graphics.ResourceLoaders
 			}
 
 			using (var ms = new MemoryStream(data))
-			using (BsonReader bson = new BsonReader(ms))
 			{
-				var serializer = new JsonSerializer();
-				return serializer.Deserialize<MaterialData.Material>(bson);
+				var formatter = new BinaryFormatter();
+				return (MaterialData.Material)formatter.Deserialize(ms);
 			}
 		}
 

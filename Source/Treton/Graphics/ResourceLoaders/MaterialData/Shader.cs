@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Treton.Graphics.ResourceLoaders.MaterialData
 {
+	[Serializable]
 	public class Shader
 	{
 		public OpenTK.Graphics.OpenGL.ShaderType Type;

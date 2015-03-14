@@ -60,7 +60,7 @@ namespace Treton.Graphics.Renderer.Modifiers
 						renderSystem.SetShader(shader);
 					}
 
-					renderSystem.Draw(mesh.SubMeshes[0].Offset, mesh.SubMeshes[0].Count);
+					renderSystem.DrawIndexed(mesh.Handle, mesh.SubMeshes[0].Offset, mesh.SubMeshes[0].Count);
 				}
 			}
 		}

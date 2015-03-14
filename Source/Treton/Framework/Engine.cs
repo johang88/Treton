@@ -124,7 +124,7 @@ namespace Treton.Framework
 
 			// Init resource loaders
 			_resourceLoaders.Add(Core.Hash.HashString("material"), new Graphics.ResourceLoaders.MaterialLoader(_mainThreadScheduler));
-			_resourceLoaders.Add(Core.Hash.HashString("renderconfig"), new Graphics.ResourceLoaders.RenderConfigLoader(_mainThreadScheduler, _renderSystem));
+			_resourceLoaders.Add(Core.Hash.HashString("renderconfig"), new Graphics.ResourceLoaders.RenderConfigLoader(_mainThreadScheduler, _resourceManager, _renderSystem));
 
 			// Load core package
 			var coreResourcesLoadTask = _coreResources.Load();

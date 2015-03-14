@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Treton.Core.Resources
 {
+	[Serializable]
 	public struct ResourceId
 	{
 		public readonly uint Name;

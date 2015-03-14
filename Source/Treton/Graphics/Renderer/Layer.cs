@@ -13,13 +13,20 @@ namespace Treton.Graphics.Renderer
 		[NonSerialized]
 		public Texture[] RenderTargets;
 		public uint[] RenderTargetNames;
+		public uint? ResourceGeneratorName;
+		public ResourceGenerator ResourceGenerator;
 
-		internal void Initialize(Func<uint, Texture> renderTargetLocator)
+		internal void Initialize(Func<uint, Texture> renderTargetLocator, Func<uint, ResourceGenerator> resourceGeneratorLocator)
 		{
 			RenderTargets = new Texture[RenderTargetNames.Length];
 			for (var i = 0; i < RenderTargetNames.Length; i++ )
 			{
 				RenderTargets[i] = renderTargetLocator(RenderTargetNames[i]);
+			}
+
+			if (ResourceGeneratorName != null)
+			{
+				ResourceGenerator = resourceGeneratorLocator(ResourceGeneratorName.Value);
 			}
 		}
 	}

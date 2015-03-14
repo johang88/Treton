@@ -11,7 +11,7 @@
 	},
 	"ResourceGenerators": {
 		"Tonemap": [
-			{ "Type": "FullScreenPass", "Material": "/Materials/Post/Tonemap.material" }
+			{ "Type": "FullscreenPass", "Material": "Core/Materials/Post/Tonemap.material" }
 		]
 	}
 }
