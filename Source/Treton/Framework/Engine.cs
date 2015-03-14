@@ -108,7 +108,35 @@ namespace Treton.Framework
 		private void Initialize()
 		{
 			// Create window
-			_window = new NativeWindow(_configuration.Renderer.Width, _configuration.Renderer.Height, _configuration.Title, GameWindowFlags.Default, GraphicsMode.Default, DisplayDevice.Default);
+			var width = _configuration.Renderer.Width;
+			var height = _configuration.Renderer.Height;
+
+			var display = DisplayDevice.GetDisplay(_configuration.Renderer.Display);
+			var flags = GameWindowFlags.Default;
+			var isBorderless = false;
+
+			switch (_configuration.Renderer.FullscreenMode)
+			{
+				case FullscreenMode.Borderless:
+					// Borderless requires native resolution
+					width = display.Width;
+					height = display.Height;
+
+					isBorderless = true;
+					break;
+				case FullscreenMode.Fullscreen:
+					flags |= GameWindowFlags.Fullscreen;
+					break;
+			}
+
+			_window = new NativeWindow(width, height, _configuration.Title, flags, GraphicsMode.Default, display);
+
+			if (isBorderless)
+			{
+				_window.WindowBorder = WindowBorder.Hidden;
+				_window.ClientSize = new System.Drawing.Size(width, height);
+			}
+
 			_window.Visible = true;
 			_window.Resize += _window_Resize;
 

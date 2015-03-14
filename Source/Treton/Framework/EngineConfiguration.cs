@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using OpenTK;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +25,16 @@ namespace Treton.Framework
 		{
 			public int Width { get; set; }
 			public int Height { get; set; }
+			public FullscreenMode FullscreenMode { get; set; }
+			public DisplayIndex Display { get; set; }
 			public string RenderConfig { get; set; }
 		}
+	}
+
+	public enum FullscreenMode
+	{
+		Windowed,
+		Borderless,
+		Fullscreen
 	}
 }

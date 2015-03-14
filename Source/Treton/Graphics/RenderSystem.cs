@@ -26,6 +26,8 @@ namespace Treton.Graphics
 			GL.BindProgramPipeline(_pipelineHandle);
 
 			_frameBufferHandle = GL.GenFramebuffer();
+
+			GL.Viewport(0, 0, Width, Height);
 		}
 
 		public void Dispose()
