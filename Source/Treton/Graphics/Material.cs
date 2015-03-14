@@ -43,6 +43,22 @@ namespace Treton.Graphics
 			}
 		}
 
+		public bool HasLayer(uint name)
+		{
+			return GetLayer(name) != null;
+		}
+
+		public Layer GetLayer(uint name)
+		{
+			for (var i =0 ; i < Layers.Length; i++)
+			{
+				if (Layers[i].Name == name)
+					return Layers[i];
+			}
+
+			return null;
+		}
+
 		public class Layer
 		{
 			public readonly uint Name;

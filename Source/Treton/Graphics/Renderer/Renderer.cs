@@ -73,24 +73,25 @@ namespace Treton.Graphics.Renderer
 
 						for (var subMeshIndex = 0; subMeshIndex < mesh.SubMeshes.Length; subMeshIndex++)
 						{
+							if (!mesh.Materials[subMeshIndex].HasLayer(layer.Name))
+								continue;
+
 							var material = mesh.Materials[subMeshIndex];
+							var materiaLayer = material.GetLayer(layer.Name);
 
-							foreach (var materiaLayer in material.Layers)
+							if (materiaLayer.Name != layer.Name)
+								break;
+
+							foreach (var pass in materiaLayer.Passes)
 							{
-								if (materiaLayer.Name != layer.Name)
-									break;
+								_renderSystem.ClearShaders();
 
-								foreach (var pass in materiaLayer.Passes)
+								foreach (var shader in pass.Shaders)
 								{
-									_renderSystem.ClearShaders();
-
-									foreach (var shader in pass.Shaders)
-									{
-										_renderSystem.SetShader(shader);
-									}
-
-									_renderSystem.Draw(mesh.Handle, mesh.SubMeshes[subMeshIndex].Offset, mesh.SubMeshes[subMeshIndex].Count);
+									_renderSystem.SetShader(shader);
 								}
+
+								_renderSystem.Draw(mesh.Handle, mesh.SubMeshes[subMeshIndex].Offset, mesh.SubMeshes[subMeshIndex].Count);
 							}
 						}
 					}
