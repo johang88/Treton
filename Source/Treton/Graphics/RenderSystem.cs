@@ -45,6 +45,19 @@ namespace Treton.Graphics
 			GL.DeleteProgramPipeline(_pipelineHandle);
 		}
 
+		public void Resize(int width, int height)
+		{
+			if (width <= 0)
+				throw new ArgumentException("width <= 0");
+			if (height <= 0)
+				throw new ArgumentException("height <= 0");
+
+			Width = width;
+			Height = height;
+
+			GL.Viewport(0, 0, Width, Height);
+		}
+
 		public void SetShader(Shader shader)
 		{
 			ProgramStageMask mask = ProgramStageMask.VertexShaderBit;

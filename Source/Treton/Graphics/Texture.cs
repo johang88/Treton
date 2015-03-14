@@ -23,6 +23,32 @@ namespace Treton.Graphics
 			Id = id;
 		}
 
+		/// <summary>
+		/// Resize the texture, immutable textures will be recreated as their storage requirments
+		/// can not be changed otherwise.
+		/// </summary>
+		/// <param name="width">New width</param>
+		/// <param name="height">New height</param>
+		public void Resize(int width, int height)
+		{
+			Width = width;
+			Height = height;
+
+			if (IsMutable)
+			{
+				// TODO ....
+				GL.Ext.TextureImage2D(Handle, TextureTarget, 0, (int)Format, Width, Height, 0, PixelFormat.Red, PixelType.Byte, IntPtr.Zero);
+			}
+			else
+			{
+				// Recreate the texture so that we may change the backing storage
+				GL.DeleteTexture(Handle);
+				Handle = GL.GenTexture();
+
+				GL.Ext.TextureStorage2D(Handle, (ExtDirectStateAccess)TextureTarget, 1, (ExtDirectStateAccess)Format, Width, Height);
+			}
+		}
+
 		public static Texture CreateMutable(Core.Resources.ResourceId id, TextureTarget target, int width, int height, PixelInternalFormat format)
 		{
 			var texture = new Texture(id);

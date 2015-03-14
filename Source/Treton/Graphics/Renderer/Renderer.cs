@@ -29,6 +29,22 @@ namespace Treton.Graphics.Renderer
 			SetLayerConfiguration(Core.Hash.HashString("Default"));
 		}
 
+		/// <summary>
+		/// Call when the render window has been resized.
+		/// This will resize all current render targets. 
+		/// The new dimension are fetched from the rendersystem.
+		/// </summary>
+		public void Resize()
+		{
+			var width = _renderSystem.Width;
+			var height = _renderSystem.Height;
+
+			foreach (var renderTarget in _configuration.GlobalRenderTargets)
+			{
+				renderTarget.Resize(width, height);
+			}
+		}
+
 		public void Render(World.RenderWorld renderWorld, Camera camera, Viewport viewport)
 		{
 			var layerConfiguration = _configuration.LayerConfigurations[_activeLayerConfiguration];

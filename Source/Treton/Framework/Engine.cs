@@ -110,6 +110,7 @@ namespace Treton.Framework
 			// Create window
 			_window = new NativeWindow(_configuration.Renderer.Width, _configuration.Renderer.Height, _configuration.Title, GameWindowFlags.Default, GraphicsMode.Default, DisplayDevice.Default);
 			_window.Visible = true;
+			_window.Resize += _window_Resize;
 
 			// Setup gl context + render system
 			_context = new GraphicsContext(GraphicsMode.Default, _window.WindowInfo, 4, 4, GraphicsContextFlags.ForwardCompatible | GraphicsContextFlags.Debug);
@@ -120,7 +121,7 @@ namespace Treton.Framework
 			GL.DebugMessageCallback(_debugProcCallback, IntPtr.Zero);
 			GL.Enable(EnableCap.DebugOutput);
 
-			_renderSystem = new RenderSystem(_configuration.Renderer.Width, _configuration.Renderer.Height);
+			_renderSystem = new RenderSystem(_window.Width, _window.Height);
 
 			// Init resource loaders
 			_resourceLoaders.Add(Core.Hash.HashString("material"), new Graphics.ResourceLoaders.MaterialLoader(_mainThreadScheduler));
@@ -137,6 +138,12 @@ namespace Treton.Framework
 			// Setup renderer
 			var renderConfig = _resourceManager.Get<RendererConfiguration>(new ResourceId(_configuration.Renderer.RenderConfig, "renderconfig"));
 			_renderer = new Renderer(_renderSystem, renderConfig);
+		}
+
+		void _window_Resize(object sender, EventArgs e)
+		{
+			_renderSystem.Resize(_window.Width, _window.Height);
+			_renderer.Resize();
 		}
 
 		private void GLDebugCallback(DebugSource source, DebugType type, int id, DebugSeverity severity, int length, IntPtr message, IntPtr userParam)
