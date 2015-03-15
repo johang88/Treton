@@ -136,8 +136,9 @@ namespace Treton.Framework
 
 			if (isBorderless)
 			{
-				_window.WindowBorder = WindowBorder.Hidden;
 				_window.ClientSize = new System.Drawing.Size(width, height);
+				_window.WindowBorder = WindowBorder.Hidden;
+				_window.WindowState = WindowState.Fullscreen;
 			}
 
 			_window.Visible = true;
