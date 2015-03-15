@@ -15,13 +15,14 @@ using Treton.Core.IO;
 using Treton.Graphics.Renderer;
 using Treton.Core;
 using Treton.Graphics.World;
+using Treton.Core.Concurrency;
 
 namespace Treton.Framework
 {
 	public class Engine : IDisposable
 	{
 		// Threading
-		private readonly Core.MainThreadScheduler _mainThreadScheduler;
+		private readonly MainThreadScheduler _mainThreadScheduler;
 		private readonly Stopwatch _timer;
 
 		// Configuration
@@ -50,7 +51,7 @@ namespace Treton.Framework
 			_configuration = configuration;
 
 			// Init threading framework
-			_mainThreadScheduler = new Core.MainThreadScheduler(Thread.CurrentThread);
+			_mainThreadScheduler = new MainThreadScheduler(Thread.CurrentThread);
 			_timer = new Stopwatch();
 
 			// IO setup

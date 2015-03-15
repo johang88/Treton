@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Treton.Core;
 using Treton.Core.Resources;
+using Treton.Core.Concurrency;
 
 namespace Treton.Graphics.ResourceLoaders
 {

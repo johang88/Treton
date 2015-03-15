@@ -7,7 +7,7 @@ using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Threading;
 
-namespace Treton.Core
+namespace Treton.Core.Concurrency
 {
 	public class MainThreadScheduler : System.Threading.Tasks.TaskScheduler
 	{
