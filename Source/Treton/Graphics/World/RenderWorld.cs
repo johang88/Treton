@@ -9,11 +9,11 @@ namespace Treton.Graphics.World
 {
 	public class RenderWorld
 	{
-		private const int MaxMeshInstnaces = 1024;
+		private const int MaxMeshInstances = 1024;
 
-		private int[] _indexMap = new int[MaxMeshInstnaces];
-		private Matrix4[] _worldMatrices= new Matrix4[MaxMeshInstnaces];
-		private Mesh[] _meshes = new Mesh[MaxMeshInstnaces];
+		private int[] _indexMap = new int[MaxMeshInstances];
+		private Matrix4[] _worldMatrices= new Matrix4[MaxMeshInstances];
+		private Mesh[] _meshes = new Mesh[MaxMeshInstances];
 		private int _meshCount = 0;
 		private int _lastId = 0;
 
@@ -49,7 +49,7 @@ namespace Treton.Graphics.World
 			_worldMatrices[index] = world;
 		}
 
-		internal void GetMeshInstnaces(out int count, out Matrix4[] worldMatrices, out Mesh[] meshes)
+		internal void GetMeshInstances(out int count, out Matrix4[] worldMatrices, out Mesh[] meshes)
 		{
 			count = _meshCount;
 			worldMatrices = _worldMatrices;

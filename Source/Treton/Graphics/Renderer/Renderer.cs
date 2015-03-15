@@ -50,7 +50,7 @@ namespace Treton.Graphics.Renderer
 			var layerConfiguration = _configuration.LayerConfigurations[_activeLayerConfiguration];
 
 			int meshCount; Matrix4[] worldMatrices; Mesh[] meshes;
-			renderWorld.GetMeshInstnaces(out meshCount, out worldMatrices, out meshes);
+			renderWorld.GetMeshInstances(out meshCount, out worldMatrices, out meshes);
 
 			// todo: make this not suck
 			foreach (var layer in layerConfiguration.Layers)
