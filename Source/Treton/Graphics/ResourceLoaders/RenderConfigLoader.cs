@@ -13,24 +13,18 @@ namespace Treton.Graphics.ResourceLoaders
 {
 	class RenderConfigLoader : ILoader
 	{
-		private readonly MainThreadScheduler _scheduler;
 		private readonly Core.Resources.IResourceManager _resourceManager;
 		private readonly RenderSystem _renderSystem;
-		private readonly TaskFactory _factory;
 
-		public RenderConfigLoader(MainThreadScheduler scheduler, Core.Resources.IResourceManager resourceManager, RenderSystem renderSystem)
+		public RenderConfigLoader(Core.Resources.IResourceManager resourceManager, RenderSystem renderSystem)
 		{
-			if (scheduler == null)
-				throw new ArgumentNullException("scheduler");
 			if (resourceManager == null)
 				throw new ArgumentNullException("resourceManager");
 			if (renderSystem == null)
 				throw new ArgumentNullException("renderSystem");
 
-			_scheduler = scheduler;
 			_resourceManager = resourceManager;
 			_renderSystem = renderSystem;
-			_factory = new TaskFactory(scheduler);
 		}
 
 		private async Task<Renderer.RendererConfiguration> LoadImpl(ResourceId id, System.IO.Stream stream)
@@ -67,14 +61,14 @@ namespace Treton.Graphics.ResourceLoaders
 		public async Task<object> Load(ResourceId id, System.IO.Stream stream)
 		{
 			var resource = await LoadImpl(id, stream);
-			await _factory.StartNew(() => BringIn(resource));
+			await TaskHelpers.RunOnMainThread(() => BringIn(resource));
 
 			return resource;
 		}
 
 		public async Task Unload(object resource)
 		{
-			await _factory.StartNew(() => BringOut((Renderer.RendererConfiguration)resource));
+			await TaskHelpers.RunOnMainThread(() => BringOut((Renderer.RendererConfiguration)resource));
 			await UnloadImpl((Renderer.RendererConfiguration)resource);
 		}
 	}

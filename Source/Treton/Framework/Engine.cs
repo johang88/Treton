@@ -52,6 +52,8 @@ namespace Treton.Framework
 
 			// Init threading framework
 			_mainThreadScheduler = new MainThreadScheduler(Thread.CurrentThread);
+			TaskHelpers.Initialize(_mainThreadScheduler);
+
 			_timer = new Stopwatch();
 
 			// IO setup
@@ -153,8 +155,8 @@ namespace Treton.Framework
 			_renderSystem = new RenderSystem(_window.Width, _window.Height);
 
 			// Init resource loaders
-			_resourceLoaders.Add(Core.Hash.HashString("material"), new Graphics.ResourceLoaders.MaterialLoader(_mainThreadScheduler));
-			_resourceLoaders.Add(Core.Hash.HashString("renderconfig"), new Graphics.ResourceLoaders.RenderConfigLoader(_mainThreadScheduler, _resourceManager, _renderSystem));
+			_resourceLoaders.Add(Core.Hash.HashString("material"), new Graphics.ResourceLoaders.MaterialLoader());
+			_resourceLoaders.Add(Core.Hash.HashString("renderconfig"), new Graphics.ResourceLoaders.RenderConfigLoader(_resourceManager, _renderSystem));
 
 			// Load core package
 			var coreResourcesLoadTask = _coreResources.Load();

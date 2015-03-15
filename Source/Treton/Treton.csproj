@@ -58,7 +58,7 @@
     <Compile Include="ContentPipeline\ContentCompilerDiscoverer.cs" />
     <Compile Include="ContentPipeline\ICompiler.cs" />
     <Compile Include="ContentPipeline\PackageCompiler.cs" />
-    <Compile Include="Core\Concurrency\TaskExtensions.cs" />
+    <Compile Include="Core\Concurrency\TaskHelpers.cs" />
     <Compile Include="Core\Hash.cs" />
     <Compile Include="Core\IO\FileSystem.cs" />
     <Compile Include="Core\Concurrency\MainThreadScheduler.cs" />

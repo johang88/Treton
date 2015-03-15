@@ -13,12 +13,6 @@ namespace Treton.Graphics.ResourceLoaders
 {
 	class MaterialLoader : BaseLoader<Material, MaterialData.Material>
 	{
-		public MaterialLoader(MainThreadScheduler scheduler)
-			: base(scheduler)
-		{
-
-		}
-
 		protected override async Task<MaterialData.Material> LoadImpl(ResourceId id, System.IO.Stream stream)
 		{
 			byte[] data = new byte[stream.Length];
