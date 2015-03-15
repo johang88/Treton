@@ -36,7 +36,14 @@ namespace Treton.Core
 
 		protected override bool TryExecuteTaskInline(Task task, bool taskWasPreviouslyQueued)
 		{
-			return _mainThread == Thread.CurrentThread;
+			if (Thread.CurrentThread == _mainThread)
+			{
+				return TryExecuteTask(task);
+			}
+			else
+			{
+				return false;
+			}
 		}
 
 		public void Tick(Stopwatch timer, long maxTicks)
